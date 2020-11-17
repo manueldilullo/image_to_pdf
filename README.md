@@ -1,5 +1,4 @@
 # png_to_pdf
----
 Simply converter from png to pdf and vice versa.   
 With this script you can choose if create a pdf using a set of images or to split a pdf in pages and save them as images.   
    
@@ -9,7 +8,6 @@ With this script you can choose if create a pdf using a set of images or to spli
 _Source_ and _destination_ args are mandatory. You can also choose if delete the elements from source after the conversion.   
 
 ## Requirements 
----
 To use this script you must install the following modules
 ```bash
 pdf2image==1.14.0
@@ -23,7 +21,6 @@ pip install python-poppler
 ```
 
 ## Usage 
----
 The script was built to being used from terminal/cmd.
 If you want to build a pdf from images, a simple usage is the following:
 ```bash
@@ -44,5 +41,4 @@ The options are:
 ```
 
 ## License 
----
 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
