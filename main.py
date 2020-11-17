@@ -25,15 +25,14 @@ def progress(count, total, status=''):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Merge images in pdf')
+    parser = argparse.ArgumentParser(description='PDF-to-Images and vice versa converter')
 
     # INPUT ARGUMENT DEFINITION
     parser.add_argument('-i', '--image_source_folder', help='Source from which to take image')
     parser.add_argument('-p', '--pdf_source', help='Source from which to take .pdf files')
     parser.add_argument('-o', '--destination_folder', help='Destination where to save .pdf or images files')
-    parser.add_argument('-d', '--delete_after_run', help='Choose if delete files after conversion [y/n], DEFAULT: n',
-                        default="n")
-    parser.add_argument('-r', '--reverse', help='Choose if split pdf in images [y/n], DEFAULT: n', default="n")
+    parser.add_argument('-d', '--delete_after_run', help='Choose if delete files after conversion [y/n], DEFAULT: n', default="n")
+    parser.add_argument('-r', '--reverse', help='If yes, splits pdf in images, else vice versa [y/n], DEFAULT: n', default="n")
 
     args = parser.parse_args()
 
@@ -52,15 +51,20 @@ def main():
     if not exists(outputfolder):
         makedirs(outputfolder)
 
-    if pdfsource is None and imagesfolder is None:
-        logging.error("Error with source path! Invalid arguments")
-        sleep(5)
-        sys.exit("Invalid PDF path")
-
     if args.reverse in ("y", "Y"):
-        pdf_to_png(pdfsource, outputfolder, deletion)
+        if not pdfsource is None:
+            pdf_to_png(pdfsource, outputfolder, deletion)
+        else:
+            logging.error("PDF source folder Invalid!")
+            sleep(5)
+            sys.exit("PDF source folder Invalid!")
     else:
-        png_to_pdf(imagesfolder, outputfolder, deletion)
+        if not imagesfolder is None:
+            png_to_pdf(imagesfolder, outputfolder, deletion)
+        else:
+            logging.error("Images source folder Invalid!")
+            sleep(5)
+            sys.exit("Images source folder Invalid!")
 
     print("\nDONE!")
     subprocess.Popen('explorer ' + outputfolder.replace("/", "\\"))
