@@ -23,6 +23,13 @@ def progress(count, total, status=''):
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
     sys.stdout.flush()
 
+# check if the image's extension is acceptable
+def check_extension(string):
+    accept = [".png", ".jpg", ".jpeg"]
+    for acc in accept:
+        if acc in string:
+            return True
+    return False
 
 def main():
     parser = argparse.ArgumentParser(description='PDF-to-Images and vice versa converter')
@@ -77,7 +84,7 @@ def png_to_pdf(source, dest, delete):
 
     # Extracting images that ends with ".png" or ".jpg" characters from input folder
     images = [source + "/" + image for image in listdir(source) if
-              (isfile(join(source, image)) and ((".png" in image) or (".jpg" in image)))]
+              (isfile(join(source, image)) and (check_extension(image)))]
 
     # for each image finded in source folder
     # open and convert
