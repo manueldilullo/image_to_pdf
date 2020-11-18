@@ -75,7 +75,7 @@ def main():
 
     print("\nDONE!")
     subprocess.Popen('explorer ' + outputfolder.replace("/", "\\"))
-    sleep(10)
+    sleep(5)
 
 
 def png_to_pdf(source, dest, delete):
@@ -98,8 +98,9 @@ def png_to_pdf(source, dest, delete):
 
     # saving the pdf
     progress(50, 100, status='\nSaving pdfs')
+    n = len(listdir(dest))
     try:
-        converted[0].save(dest + "/file.pdf", save_all=True, append_images=converted[1:])
+        converted[0].save(dest + "/file"+str(n)+".pdf", save_all=True, append_images=converted[1:])
     except Exception as e:
         logging.error("Errore!! ", e)
         sleep(5)
