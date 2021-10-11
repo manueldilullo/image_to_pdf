@@ -85,6 +85,10 @@ def png_to_pdf(source, dest, delete):
     # Extracting images that ends with ".png" or ".jpg" characters from input folder
     images = [source + "/" + image for image in listdir(source) if
               (isfile(join(source, image)) and (check_extension(image)))]
+    
+    if len(images) == 0:
+        logging.info("No images in source folder")
+        return None
 
     # for each image finded in source folder
     # open and convert
@@ -120,7 +124,7 @@ def pdf_to_png(source, dest, delete):
 
     if len(pdfs) == 0:
         logging.warning("NO PDFS FOUND")
-        return 0
+        return None
 
     # Store Pdf with convert_from_path function
     groups_of_images = []
